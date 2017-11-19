@@ -12,11 +12,21 @@ public:
 
   /*
   * Coefficients
-  */ 
+  */
   double Kp;
   double Ki;
   double Kd;
 
+  /*
+  * Store prev_cte, int_cte
+  */
+  double prec_cte;
+  double int_cte;
+
+  /*
+   * If it is the first msmt?
+  */
+  bool isFirstMsmt;
   /*
   * Constructor
   */
