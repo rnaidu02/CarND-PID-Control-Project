@@ -20,13 +20,21 @@ public:
   /*
   * Store prev_cte, int_cte
   */
-  double prec_cte;
+  double prev_cte;
   double int_cte;
 
   /*
    * If it is the first msmt?
   */
   bool isFirstMsmt;
+
+  /*
+   * Number of samples to keep for cte
+  */
+  unsigned int nCTEValues;
+
+  std::vector<double > cteList;
+  double cteSum;
   /*
   * Constructor
   */
