@@ -35,6 +35,18 @@ public:
 
   std::vector<double > cteList;
   double cteSum;
+
+  /*
+   * Twiddle related variables
+  */
+
+  double errorTolerance;        //tolerance for total error
+  std::vector<double > dpList;  //store dp error for PID
+  double dBestError;            //store best error
+  double dTotalError;           //store total error measured
+  unsigned int nRunLimit;       //offset number of iterations for run function to measure total error
+  unsigned int nRunRangeLimit;  //total number of iterations for twiddle function to run
+  unsigned int nCurrentStep;    //Current step counter
   /*
   * Constructor
   */

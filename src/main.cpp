@@ -34,7 +34,7 @@ int main()
 
   PID pid;
   // TODO: Initialize the pid variable.
-  pid.Init(0.1, 1, 0.1);
+  pid.Init(0.1, 0.0002, 0.1);
 
   h.onMessage([&pid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
     // "42" at the start of the message means there's a websocket message event.
@@ -58,26 +58,23 @@ int main()
           * NOTE: Feel free to play around with the throttle and speed. Maybe use
           * another PID controller to control the speed!
           */
-          if (pid.isFirstMsmt) {
-              speed = 25;
-          }
+          //if (pid.isFirstMsmt) {
+        //      speed = 25;
+          //}
           pid.UpdateError(cte);
           //steer = -params[0] * cte - params[1] * diff_cte - params[2] * int_cte
-          steer_value = - (pid.Kp*pid.p_error + pid.Ki*pid.i_error + pid.Kd*pid.d_error);
+          steer_value = (- (pid.Kp*pid.p_error + pid.Ki*pid.i_error + pid.Kd*pid.d_error));
           std::cout <<  "Steer Value " << steer_value << std::endl;
           std::cout << "p, i, d kps = " << pid.Kp << ", " << pid.Ki << ", " << pid.Kd << std::endl;
-          if (steer_value > 1){
-              steer_value = 1;
-          } else if (steer_value < -1){
-              steer_value = -1;
-          }
+          steer_value = std::max(std::min(1.0, steer_value), -1.0);
+
           // DEBUG
           std::cout << "p, i, d error = " << pid.p_error << ", " << pid.i_error << ", " << pid.d_error << std::endl;
           std::cout << "CTE: " << cte << "Speed" << speed << "Angle" << angle << " Steering Value: " << steer_value << std::endl;
 
           json msgJson;
           msgJson["steering_angle"] = steer_value;
-          msgJson["throttle"] = 1.0;
+          msgJson["throttle"] = 1.0/10.0;
           auto msg = "42[\"steer\"," + msgJson.dump() + "]";
           std::cout << msg << std::endl;
           ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
