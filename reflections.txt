@@ -7,3 +7,9 @@ When dp of Integrtal is set to 1 or 0.1 (here steering value is 0.04 - 0.15), wh
 One other is the integral coeff and its error. Not considering it solved my problem. This is causing wide steering angles and is causing issues. Once i remove this from stering calculations it worked fine
 Another variable that impacts the driving is the throttle. At throttle of 0.1, it is having a smooth ride. However when it is increased to 0.2 (which doubles the speed aroudn 20 mph) is had wild terns and the rides with wide swings, though it drives without overshooting the track.
 Did a hybrid approach for the throttle - when the steering angle is more than 0.4 rad, then reduce the thrust - if not have the throttle to 0.2
+
+At the turns it is having bigger steering angles (discomfort for the occupants and the viewers of the simulation :)), and is slowing down as the throttle is reduced.
+
+Reduced the number of iterations before twiddle params are updated to 2 (as opposed to 200 in the lesson). When I tried 200 samples to use exising params before using twiddle to update caused wild steering angles.
+This is implementation is compute intensive as it frequently uses twiddle algo before dp error is within the tolerance. However after 587 samples, the dp error is within telerance of 0.1 and it is fixed with params of 0.719079, 0.766853, 0.902407
+0.719079, 0.766853, 0.902407

@@ -112,6 +112,7 @@ void PID::UpdateError(double cte) {
                 tPhase = PHASE1;
                 pramInProgress = (pramInProgress+1)%3;
 
+                cout << "Current Step at which the param updates are done" << nCurrentStep << endl;
                 cout << "After param update dp coeff" << dpList[0] << ", " <<  dpList[1] << ", " << dpList[2] << endl;
                 cout << "After param update K coeff" << Kp << ", " << Ki << ", " << Kd << endl;
                 break;

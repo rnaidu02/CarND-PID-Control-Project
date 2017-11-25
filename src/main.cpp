@@ -63,7 +63,7 @@ int main()
           //}
           pid.UpdateError(cte);
           //steer = -params[0] * cte - params[1] * diff_cte - params[2] * int_cte
-          steer_value = (- (pid.Kp*pid.p_error /*+ pid.Ki*pid.i_error */+ pid.Kd*pid.d_error));
+          steer_value = (- (pid.Kp*pid.p_error /* + pid.Ki*pid.i_error */ + pid.Kd*pid.d_error));
           /*std::cout <<  "Steer Value " << steer_value << std::endl;
           std::cout << "p, i, d kps = " << pid.Kp << ", " << pid.Ki << ", " << pid.Kd << std::endl;
 */
