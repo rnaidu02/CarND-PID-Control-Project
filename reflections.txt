@@ -1,0 +1,9 @@
+p values are inited to 0, 0, 0
+dp is inited to 1, 1, 1
+
+
+When dp of Integrtal is set to 1 or 0.1 (here steering value is 0.04 - 0.15), when the Ki is updated it is going rouge (steering is turned -4.4). So tuning down to 0.001
+
+One other is the integral coeff and its error. Not considering it solved my problem. This is causing wide steering angles and is causing issues. Once i remove this from stering calculations it worked fine
+Another variable that impacts the driving is the throttle. At throttle of 0.1, it is having a smooth ride. However when it is increased to 0.2 (which doubles the speed aroudn 20 mph) is had wild terns and the rides with wide swings, though it drives without overshooting the track.
+Did a hybrid approach for the throttle - when the steering angle is more than 0.4 rad, then reduce the thrust - if not have the throttle to 0.2

@@ -1,6 +1,7 @@
 #ifndef PID_H
 #define PID_H
 
+enum TWIDDLE_PHASES {PHASE1, PHASE2, PHASE3, PHASE4};
 class PID {
 public:
   /*
@@ -47,6 +48,14 @@ public:
   unsigned int nRunLimit;       //offset number of iterations for run function to measure total error
   unsigned int nRunRangeLimit;  //total number of iterations for twiddle function to run
   unsigned int nCurrentStep;    //Current step counter
+
+  bool  isBestErrorInitalized; //Is it first time in while Loop?
+  unsigned int pramInProgress;  //param update in progress (possible values 0, 1, 2 for Kp, Ki, Kd)
+
+  bool isFirstTimeAdded;        //First time dp added to param
+  bool isSecondTimeAdded;        //Second time dp added to param
+
+  TWIDDLE_PHASES    tPhase;    //Twiddle algo phases
   /*
   * Constructor
   */
@@ -71,6 +80,11 @@ public:
   * Calculate the total PID error.
   */
   double TotalError();
+
+  /*
+   * UpdateParamWithdp(unsigned int paramIndex, double dpVL)
+  */
+  void UpdateParamWithdp(unsigned int paramIndex, double dpVal);
 };
 
 #endif /* PID_H */
