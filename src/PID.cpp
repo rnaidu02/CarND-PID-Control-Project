@@ -22,7 +22,7 @@ void PID::Init(double Kp, double Ki, double Kd) {
 
     isFirstMsmt = true;
 
-    //nCTEValues = 200;   //remove this
+    nCTEValues = 2;   //number of values for int_cte to keep
     cteSum = 0.0;
     prev_cte = 0.0;
 
